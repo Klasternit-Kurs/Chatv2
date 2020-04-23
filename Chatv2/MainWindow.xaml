@@ -15,7 +15,7 @@
 			<TextBox Text="{Binding Source={StaticResource k1}, Path=Unos}"/>
 			<Button Content="Posalji" Click="Posalji" DataContext="{StaticResource k1}"/>
 			<Label/>
-			<ComboBox/>
+			<ComboBox Name="cmb" SelectedItem="{Binding Source={StaticResource k1}, Path=TrenutnaSoba, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
 		</UniformGrid>
 	</StackPanel>
 </Window>
