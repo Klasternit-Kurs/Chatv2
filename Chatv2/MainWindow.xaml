@@ -5,17 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chatv2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="487.396" Width="800">
-	<Window.Resources>
-		<local:Korisnik Ime="Pera" x:Key="k1"/>
-	</Window.Resources>
-	<StackPanel>
-		<ItemsControl Name="ic" Height="400" ItemsSource="{Binding Source={StaticResource k1}, Path=PrimljenePoruke}"/>
-		<UniformGrid Columns="2">
-			<TextBox Text="{Binding Source={StaticResource k1}, Path=Unos}"/>
-			<Button Content="Posalji" Click="Posalji" DataContext="{StaticResource k1}"/>
-			<Label/>
-			<ComboBox Name="cmb" SelectedItem="{Binding Source={StaticResource k1}, Path=TrenutnaSoba, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"/>
-		</UniformGrid>
+        Title="MainWindow" Height="487.396" Width="800" WindowState="Maximized">
+	<StackPanel Name="sp" Orientation="Horizontal">
 	</StackPanel>
 </Window>

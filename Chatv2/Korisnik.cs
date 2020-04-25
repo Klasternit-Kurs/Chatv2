@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace Chatv2
 	public class Korisnik : INotifyPropertyChanged
 	{
 		public string Ime { get; set; }
-		public List<string> PrimljenePoruke { get; set; } = new List<string>();
+		public ObservableCollection<string> PrimljenePoruke { get; set; } = new ObservableCollection<string>();
+
+		public Korisnik(string i) => Ime = i;
 
 		private Soba trenutnaSoba;
 		public Soba TrenutnaSoba 
@@ -18,6 +21,8 @@ namespace Chatv2
 			get => trenutnaSoba; 
 			set
 			{
+				if (trenutnaSoba != null)
+					trenutnaSoba.PosaljiPoruku -= this.PrimiPorukuOdSobe;
 				trenutnaSoba = value;
 				if (trenutnaSoba != null)
 					trenutnaSoba.PosaljiPoruku += this.PrimiPorukuOdSobe;
@@ -44,7 +49,7 @@ namespace Chatv2
 		}
 
 		public void PrimiPorukuOdSobe(object s, PosaljiPorukuArgs a) => PrimljenePoruke.Add(
-			$"{(s as Soba).Naziv} - {a.posiljaoc.Ime}: {a.poruka}");
+			$"{DateTime.Now}: {(s as Soba).Naziv} - {a.posiljaoc.Ime}: {a.poruka}");
 
 	}
 }

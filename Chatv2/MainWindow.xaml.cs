@@ -30,17 +30,25 @@ namespace Chatv2
 			Sobe.Add(new Soba("Soba1"));
 			Sobe.Add(new Soba("Soba2"));
 			Sobe.Add(new Soba("Soba3"));
-			cmb.ItemsSource = Sobe;
-			cmb.DisplayMemberPath = "Naziv";
-			cmb.SelectedIndex = 0;
+
+			Logger l = new Logger();
+
+			//foreach (Soba s in Sobe)
+			//	s.PosaljiPoruku += l.Loguj;
+
+			Sobe.ToList()
+				.ForEach(s => s.PosaljiPoruku += l.Loguj);
+
+			ChatUI cui = new ChatUI(new Korisnik("Pera"), Sobe.ToList());
+			sp.Children.Add(cui);
+			cui = new ChatUI(new Korisnik("Neko drugi"), Sobe.ToList());
+			sp.Children.Add(cui);
+			cui = new ChatUI(new Korisnik("Neko Treci"), Sobe.ToList());
+			sp.Children.Add(cui);
+
 		}
 
-		private void Posalji(object sender, RoutedEventArgs e)
-		{
-			//(this.Resources["k1"] as Korisnik).PosaljiPoruku();
-			((sender as Control).DataContext as Korisnik).PosaljiPoruku();
-			ic.ItemsSource = ((sender as Control).DataContext as Korisnik).PrimljenePoruke.ToList();
-		}
+		
 
 		private void PromenaSoba(object sender, SelectionChangedEventArgs e)
 		{
